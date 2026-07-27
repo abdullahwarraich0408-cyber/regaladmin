@@ -187,6 +187,7 @@ export interface ServiceItem {
   short: string;
   long: string;
   highlights: string[];
+  imageUrl?: string;
   published: boolean;
   sortOrder: number;
   createdAt: string;
@@ -201,6 +202,7 @@ export interface ServiceInput {
   shortDescription: string;
   longDescription: string;
   highlights: string[];
+  imageUrl?: string;
   published: boolean;
   sortOrder: number;
 }
@@ -226,4 +228,33 @@ export interface InstagramFeedResponse {
   username?: string;
   stale?: boolean;
   error?: string;
+}
+
+export interface InstagramPostItem {
+  id: string;
+  caption: string;
+  imageUrl: string;
+  videoUrl: string;
+  postUrl: string;
+  shortcode: string;
+  likes: number;
+  isVideo: boolean;
+  isReel: boolean;
+  published: boolean;
+  sortOrder: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface InstagramPostInput {
+  caption: string;
+  imageUrl: string;
+  videoUrl?: string;
+  postUrl?: string;
+  shortcode?: string;
+  likes?: number;
+  isVideo?: boolean;
+  isReel?: boolean;
+  published: boolean;
+  sortOrder: number;
 }

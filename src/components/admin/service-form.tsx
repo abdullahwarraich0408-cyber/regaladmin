@@ -10,6 +10,7 @@ import {
 } from "@/lib/api";
 import type { ServiceInput, ServiceItem } from "@/lib/types";
 import { SERVICE_ICONS } from "@/lib/types";
+import { ImageUrlField } from "@/components/admin/media-picker";
 
 interface ServiceFormProps {
   item?: ServiceItem;
@@ -24,6 +25,7 @@ const emptyForm: ServiceInput = {
   shortDescription: "",
   longDescription: "",
   highlights: [],
+  imageUrl: "",
   published: true,
   sortOrder: 0,
 };
@@ -51,6 +53,7 @@ export function ServiceForm({ item, onCancel }: ServiceFormProps) {
           shortDescription: item.short,
           longDescription: item.long,
           highlights: item.highlights,
+          imageUrl: item.imageUrl ?? "",
           published: item.published,
           sortOrder: item.sortOrder,
         }
@@ -201,6 +204,13 @@ export function ServiceForm({ item, onCancel }: ServiceFormProps) {
           className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm outline-none focus:border-amber-400"
         />
       </label>
+
+      <ImageUrlField
+        label="Card image"
+        value={form.imageUrl ?? ""}
+        onChange={(imageUrl) => setForm((current) => ({ ...current, imageUrl }))}
+        placeholder="https://your-cdn.com/service-cover.jpg"
+      />
 
       <label className="block space-y-2">
         <span className="text-sm font-medium text-zinc-700">Long description</span>

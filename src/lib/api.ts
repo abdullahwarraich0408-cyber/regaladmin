@@ -12,6 +12,8 @@ import type {
   TestimonialInput,
   TestimonialItem,
   InstagramFeedResponse,
+  InstagramPostInput,
+  InstagramPostItem,
 } from "./types";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3001";
@@ -369,6 +371,68 @@ export async function getInstagramFeed(): Promise<InstagramFeedResponse> {
   }
 
   return (await response.json()) as InstagramFeedResponse;
+}
+
+export async function getInstagramPosts(): Promise<InstagramPostItem[]> {
+  const response = await fetch(`${API_URL}/api/instagram-posts`, {
+    cache: "no-store",
+  });
+  if (!response.ok) throw new Error("Failed to load Instagram posts");
+  const data = (await response.json()) as { items: InstagramPostItem[] };
+  return data.items;
+}
+
+export async function createInstagramPost(
+  input: InstagramPostInput
+): Promise<InstagramPostItem> {
+  const response = await fetch(`${API_URL}/api/instagram-posts`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(input),
+  });
+  if (!response.ok) throw new Error("Failed to create Instagram post");
+  const data = (await response.json()) as { item: InstagramPostItem };
+  return data.item;
+}
+
+export async function updateInstagramPost(
+  id: string,
+  input: Partial<InstagramPostInput>
+): Promise<InstagramPostItem> {
+  const response = await fetch(`${API_URL}/api/instagram-posts/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(input),
+  });
+  if (!response.ok) throw new Error("Failed to update Instagram post");
+  const data = (await response.json()) as { item: InstagramPostItem };
+  return data.item;
+}
+
+export async function deleteInstagramPost(id: string): Promise<void> {
+  const response = await fetch(`${API_URL}/api/instagram-posts/${id}`, {
+    method: "DELETE",
+  });
+  if (!response.ok) throw new Error("Failed to delete Instagram post");
+}
+
+export async function seedDemoInstagramPosts(): Promise<InstagramPostItem[]> {
+  const response = await fetch(`${API_URL}/api/instagram-posts/demo`, {
+    method: "POST",
+  });
+  if (!response.ok) {
+    const body = (await response.json().catch(() => ({}))) as { error?: string };
+    throw new Error(body.error ?? "Failed to load demo Instagram posts");
+  }
+  const data = (await response.json()) as { items: InstagramPostItem[] };
+  return data.items;
+}
+
+export async function clearAllInstagramPosts(): Promise<void> {
+  const response = await fetch(`${API_URL}/api/instagram-posts/all`, {
+    method: "DELETE",
+  });
+  if (!response.ok) throw new Error("Failed to clear Instagram posts");
 }
 
 export async function uploadImage(file: File): Promise<string> {

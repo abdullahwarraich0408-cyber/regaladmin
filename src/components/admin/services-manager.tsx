@@ -10,6 +10,7 @@ import {
   seedDemoServices,
 } from "@/lib/api";
 import type { ServiceItem } from "@/lib/types";
+import { resolveMediaUrl } from "@/lib/media-url";
 
 interface ServicesManagerProps {
   items: ServiceItem[];
@@ -183,8 +184,22 @@ export function ServicesManager({ items }: ServicesManagerProps) {
               {items.map((item) => (
                 <tr key={item.id}>
                   <td className="px-4 py-4">
-                    <div className="font-medium text-zinc-900">{item.title}</div>
-                    <div className="text-xs text-zinc-500">{item.slug}</div>
+                    <div className="flex items-center gap-3">
+                      <div className="h-12 w-16 shrink-0 overflow-hidden rounded-lg bg-zinc-100">
+                        {item.imageUrl ? (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img
+                            src={resolveMediaUrl(item.imageUrl)}
+                            alt=""
+                            className="h-full w-full object-cover"
+                          />
+                        ) : null}
+                      </div>
+                      <div>
+                        <div className="font-medium text-zinc-900">{item.title}</div>
+                        <div className="text-xs text-zinc-500">{item.slug}</div>
+                      </div>
+                    </div>
                   </td>
                   <td className="px-4 py-4 text-zinc-600">{item.bestFor}</td>
                   <td className="px-4 py-4 text-zinc-600">
