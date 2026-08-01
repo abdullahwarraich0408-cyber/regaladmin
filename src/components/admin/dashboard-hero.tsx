@@ -27,30 +27,28 @@ export function DashboardHero({ bookings }: DashboardHeroProps) {
   const confirmedCount = bookings.filter((b) => b.status === "confirmed").length;
 
   return (
-    <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#12121a] via-[#1c1b26] to-[#2d2418] p-8 shadow-xl shadow-zinc-900/10 ring-1 ring-white/10">
+    <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-midnight via-[#2a2230] to-deep-plum p-8 shadow-xl shadow-midnight/10 ring-1 ring-white/10">
       <div
         aria-hidden
-        className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-amber-400/10 blur-3xl"
+        className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-soft-gold/15 blur-3xl"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute -bottom-20 -left-10 h-48 w-48 rounded-full bg-violet-500/10 blur-3xl"
+        className="pointer-events-none absolute -bottom-20 -left-10 h-48 w-48 rounded-full bg-dusty-rose/20 blur-3xl"
       />
 
       <div className="relative flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
         <div className="max-w-xl space-y-3">
-          <p className="text-xs font-medium uppercase tracking-[0.2em] text-amber-300/80">
-            Regal Knot Events Studio
-          </p>
-          <h1 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+          <p className="eyebrow text-soft-gold/90">Regal Knot Events</p>
+          <h1 className="font-display text-3xl tracking-tight text-cream sm:text-4xl">
             {greeting}
           </h1>
-          <p className="text-sm text-zinc-400">{formatToday()}</p>
-          <p className="text-base leading-relaxed text-zinc-300">
+          <p className="text-sm text-cream/50">{formatToday()}</p>
+          <p className="text-base leading-relaxed text-cream/75">
             {newCount > 0 ? (
               <>
                 You have{" "}
-                <span className="font-semibold text-amber-200">
+                <span className="font-semibold text-soft-gold">
                   {newCount} new {newCount === 1 ? "request" : "requests"}
                 </span>{" "}
                 waiting for review.
@@ -63,7 +61,7 @@ export function DashboardHero({ bookings }: DashboardHeroProps) {
 
         <div className="flex flex-wrap gap-3">
           <div className="rounded-2xl border border-white/10 bg-white/5 px-5 py-4 backdrop-blur-sm">
-            <p className="text-xs text-zinc-400">Total bookings</p>
+            <p className="text-xs text-cream/50">Total bookings</p>
             <p className="mt-1 text-2xl font-semibold text-white">
               {bookings.length}
             </p>

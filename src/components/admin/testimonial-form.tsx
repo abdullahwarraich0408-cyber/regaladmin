@@ -76,44 +76,44 @@ export function TestimonialForm({ item, onCancel }: TestimonialFormProps) {
       <h3 className="text-lg font-semibold">{item ? "Edit testimonial" : "Add testimonial"}</h3>
 
       <label className="block space-y-2">
-        <span className="text-sm font-medium text-zinc-700">Quote</span>
+        <span className="text-sm font-medium text-midnight">Quote</span>
         <textarea
           required
           rows={4}
           value={form.quote}
           onChange={(e) => setForm((c) => ({ ...c, quote: e.target.value }))}
-          className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm"
+          className="w-full rounded-lg border border-border px-3 py-2 text-sm"
         />
       </label>
 
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="block space-y-2">
-          <span className="text-sm font-medium text-zinc-700">Name</span>
+          <span className="text-sm font-medium text-midnight">Name</span>
           <input
             required
             value={form.name}
             onChange={(e) => setForm((c) => ({ ...c, name: e.target.value }))}
-            className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm"
+            className="w-full rounded-lg border border-border px-3 py-2 text-sm"
           />
         </label>
         <label className="block space-y-2">
-          <span className="text-sm font-medium text-zinc-700">Event</span>
+          <span className="text-sm font-medium text-midnight">Event</span>
           <input
             required
             value={form.event}
             onChange={(e) => setForm((c) => ({ ...c, event: e.target.value }))}
-            className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm"
+            className="w-full rounded-lg border border-border px-3 py-2 text-sm"
           />
         </label>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-3">
         <label className="block space-y-2">
-          <span className="text-sm font-medium text-zinc-700">Rating</span>
+          <span className="text-sm font-medium text-midnight">Rating</span>
           <select
             value={form.rating}
             onChange={(e) => setForm((c) => ({ ...c, rating: Number(e.target.value) }))}
-            className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm"
+            className="w-full rounded-lg border border-border px-3 py-2 text-sm"
           >
             {[5, 4, 3, 2, 1].map((n) => (
               <option key={n} value={n}>{n} stars</option>
@@ -121,11 +121,11 @@ export function TestimonialForm({ item, onCancel }: TestimonialFormProps) {
           </select>
         </label>
         <label className="block space-y-2">
-          <span className="text-sm font-medium text-zinc-700">Source</span>
+          <span className="text-sm font-medium text-midnight">Source</span>
           <select
             value={form.source}
             onChange={(e) => setForm((c) => ({ ...c, source: e.target.value as TestimonialInput["source"] }))}
-            className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm"
+            className="w-full rounded-lg border border-border px-3 py-2 text-sm"
           >
             <option value="client">Client</option>
             <option value="google">Google Review</option>
@@ -144,7 +144,7 @@ export function TestimonialForm({ item, onCancel }: TestimonialFormProps) {
       {error ? <p className="text-sm text-rose-700">{error}</p> : null}
 
       <div className="flex flex-wrap gap-3">
-        <button type="submit" disabled={isPending} className="rounded-lg bg-[#12121a] px-4 py-2 text-sm font-medium text-white">
+        <button type="submit" disabled={isPending} className="btn-primary">
           {isPending ? "Saving..." : "Save"}
         </button>
         <button type="button" onClick={onCancel} className="rounded-lg border px-4 py-2 text-sm">Cancel</button>

@@ -124,8 +124,8 @@ function DonutChart({ bookings }: { bookings: Booking[] }) {
           ))}
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <span className="text-2xl font-semibold text-zinc-900">{total}</span>
-          <span className="text-xs text-zinc-500">Total</span>
+          <span className="text-2xl font-semibold text-midnight">{total}</span>
+          <span className="text-xs text-muted">Total</span>
         </div>
       </div>
 
@@ -140,9 +140,9 @@ function DonutChart({ bookings }: { bookings: Booking[] }) {
                 className="h-2.5 w-2.5 shrink-0 rounded-full"
                 style={{ backgroundColor: statusColors[status] }}
               />
-              <span className="flex-1 text-zinc-600">{STATUS_LABELS[status]}</span>
-              <span className="font-medium text-zinc-900">{count}</span>
-              <span className="w-10 text-right text-zinc-400">{pct}%</span>
+              <span className="flex-1 text-muted">{STATUS_LABELS[status]}</span>
+              <span className="font-medium text-midnight">{count}</span>
+              <span className="w-10 text-right text-muted/70">{pct}%</span>
             </li>
           );
         })}
@@ -157,7 +157,7 @@ function EventTypeChart({ bookings }: { bookings: Booking[] }) {
 
   if (items.length === 0) {
     return (
-      <p className="text-sm text-zinc-500">
+      <p className="text-sm text-muted">
         Event type breakdown will appear once bookings come in.
       </p>
     );
@@ -172,10 +172,10 @@ function EventTypeChart({ bookings }: { bookings: Booking[] }) {
         return (
           <li key={label}>
             <div className="mb-1.5 flex items-center justify-between gap-3 text-sm">
-              <span className="truncate font-medium text-zinc-800">{label}</span>
-              <span className="shrink-0 text-zinc-500">{count}</span>
+              <span className="truncate font-medium text-midnight">{label}</span>
+              <span className="shrink-0 text-muted">{count}</span>
             </div>
-            <div className="h-2.5 overflow-hidden rounded-full bg-zinc-100">
+            <div className="h-2.5 overflow-hidden rounded-full bg-warm-beige">
               <div
                 className="h-full rounded-full transition-all"
                 style={{ width: `${width}%`, backgroundColor: color }}
@@ -220,14 +220,14 @@ function MonthlyTrendChart({ bookings }: { bookings: Booking[] }) {
                 width={barWidth}
                 height={barHeight || 4}
                 rx={6}
-                fill={month.count > 0 ? "#12121a" : "#e4e4e7"}
+                fill={month.count > 0 ? "#1a1820" : "#ebe4d6"}
                 opacity={month.count > 0 ? 1 : 0.5}
               />
               <text
                 x={x + barWidth / 2}
                 y={chartHeight + 18}
                 textAnchor="middle"
-                className="fill-zinc-500 text-[11px]"
+                className="fill-muted text-[11px]"
               >
                 {month.label}
               </text>
@@ -236,7 +236,7 @@ function MonthlyTrendChart({ bookings }: { bookings: Booking[] }) {
                   x={x + barWidth / 2}
                   y={y - 6}
                   textAnchor="middle"
-                  className="fill-zinc-700 text-[11px] font-medium"
+                  className="fill-midnight text-[11px] font-medium"
                 >
                   {month.count}
                 </text>
@@ -259,10 +259,10 @@ function ChartCard({
   children: ReactNode;
 }) {
   return (
-    <article className="rounded-2xl border border-zinc-200/80 bg-white p-6 shadow-sm">
+    <article className="admin-card p-6">
       <div className="mb-5">
-        <h3 className="text-sm font-semibold text-zinc-900">{title}</h3>
-        <p className="mt-1 text-sm text-zinc-500">{description}</p>
+        <h3 className="font-display text-xl text-midnight">{title}</h3>
+        <p className="mt-1 text-sm text-muted">{description}</p>
       </div>
       {children}
     </article>
@@ -272,9 +272,9 @@ function ChartCard({
 export function DashboardCharts({ bookings }: DashboardChartsProps) {
   if (bookings.length === 0) {
     return (
-      <section className="rounded-2xl border border-zinc-200/80 bg-white p-8 shadow-sm">
-        <h3 className="text-sm font-semibold text-zinc-900">Analytics overview</h3>
-        <p className="mt-2 text-sm text-zinc-500">
+      <section className="admin-card p-8">
+        <h3 className="font-display text-xl text-midnight">Analytics overview</h3>
+        <p className="mt-2 text-sm text-muted">
           Charts will appear here once booking requests start coming in.
         </p>
       </section>
@@ -284,8 +284,8 @@ export function DashboardCharts({ bookings }: DashboardChartsProps) {
   return (
     <section className="space-y-4">
       <div>
-        <h2 className="text-lg font-semibold text-zinc-900">Analytics overview</h2>
-        <p className="text-sm text-zinc-500">
+        <h2 className="font-display text-2xl text-midnight">Analytics overview</h2>
+        <p className="text-sm text-muted">
           Visual breakdown of bookings, event types, and recent trends
         </p>
       </div>

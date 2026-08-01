@@ -92,57 +92,28 @@ export function ServicesManager({ items }: ServicesManagerProps) {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <div>
-          <h3 className="text-lg font-semibold text-zinc-900">Styling services</h3>
-          <p className="text-sm text-zinc-500">
-            Manage the interactive services showcase on the homepage and services page.
-          </p>
-        </div>
-        <div className="flex flex-wrap gap-3">
-            {items.length === 0 ? (
-              <button
-                type="button"
-                onClick={loadDemoData}
-                disabled={isPending}
-                className="rounded-lg border border-amber-300 bg-amber-50 px-4 py-2 text-sm font-medium text-amber-900 transition hover:bg-amber-100 disabled:opacity-60"
-              >
-                {isPending ? "Loading demo..." : "Load demo data"}
-              </button>
-            ) : (
-              <>
-                <button
-                  type="button"
-                  onClick={clearAll}
-                  disabled={isPending}
-                  className="rounded-lg border border-rose-200 px-4 py-2 text-sm font-medium text-rose-700 transition hover:bg-rose-50 disabled:opacity-60"
-                >
-                  Clear all
-                </button>
-                <button
-                  type="button"
-                  onClick={reloadDemoData}
-                  disabled={isPending}
-                  className="rounded-lg border border-amber-300 bg-amber-50 px-4 py-2 text-sm font-medium text-amber-900 transition hover:bg-amber-100 disabled:opacity-60"
-                >
-                  Reload demo data
-                </button>
-              </>
-            )}
-            <button
-              type="button"
-              onClick={openCreateForm}
-              className="rounded-lg bg-[#12121a] px-4 py-2 text-sm font-medium text-white transition hover:bg-zinc-800"
-            >
-              Add service
+      <div className="flex flex-wrap items-center justify-end gap-3">
+        {items.length === 0 ? (
+          <button type="button" onClick={loadDemoData} disabled={isPending} className="btn-gold">
+            {isPending ? "Loading demo..." : "Load demo data"}
+          </button>
+        ) : (
+          <>
+            <button type="button" onClick={clearAll} disabled={isPending} className="btn-danger">
+              Clear all
             </button>
-          </div>
+            <button type="button" onClick={reloadDemoData} disabled={isPending} className="btn-gold">
+              Reload demo data
+            </button>
+          </>
+        )}
+        <button type="button" onClick={openCreateForm} className="btn-primary">
+          Add service
+        </button>
       </div>
 
       {actionError ? (
-        <p className="rounded-lg bg-rose-50 px-3 py-2 text-sm text-rose-700">
-          {actionError}
-        </p>
+        <p className="rounded-xl bg-rose-50 px-4 py-3 text-sm text-rose-700">{actionError}</p>
       ) : null}
 
       <Modal
@@ -154,24 +125,25 @@ export function ServicesManager({ items }: ServicesManagerProps) {
       </Modal>
 
       {items.length === 0 ? (
-        <div className="rounded-2xl border border-dashed border-zinc-200 bg-white p-10 text-center">
-          <p className="text-lg font-medium text-zinc-900">No services yet</p>
-          <p className="mt-2 text-sm text-zinc-500">
-            Load demo data or add your own services before they appear on the website.
+        <div className="admin-card border-dashed p-10 text-center">
+          <p className="font-display text-2xl text-midnight">No services yet</p>
+          <p className="mt-2 text-sm text-muted">
+            Services appear on the homepage pillars and services page. Add real offerings (avoid demo
+            stock images in production).
           </p>
           <button
             type="button"
             onClick={loadDemoData}
             disabled={isPending}
-            className="mt-6 rounded-lg bg-[#12121a] px-4 py-2 text-sm font-medium text-white transition hover:bg-zinc-800 disabled:opacity-60"
+            className="btn-primary mt-6"
           >
             {isPending ? "Loading demo..." : "Load demo data"}
           </button>
         </div>
       ) : (
-        <div className="overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm">
-          <table className="min-w-full divide-y divide-zinc-200 text-left text-sm">
-            <thead className="bg-zinc-50 text-xs uppercase tracking-wide text-zinc-500">
+        <div className="admin-card">
+          <table className="min-w-full divide-y divide-border text-left text-sm">
+            <thead className="bg-warm-beige/50 text-xs uppercase tracking-wide text-muted">
               <tr>
                 <th className="px-4 py-3 font-medium">Title</th>
                 <th className="px-4 py-3 font-medium">Best for</th>
@@ -180,12 +152,12 @@ export function ServicesManager({ items }: ServicesManagerProps) {
                 <th className="px-4 py-3 font-medium">Action</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-zinc-100">
+            <tbody className="divide-y divide-border/70">
               {items.map((item) => (
-                <tr key={item.id}>
+                <tr key={item.id} className="hover:bg-warm-beige/30">
                   <td className="px-4 py-4">
                     <div className="flex items-center gap-3">
-                      <div className="h-12 w-16 shrink-0 overflow-hidden rounded-lg bg-zinc-100">
+                      <div className="h-12 w-16 shrink-0 overflow-hidden rounded-lg bg-warm-beige">
                         {item.imageUrl ? (
                           // eslint-disable-next-line @next/next/no-img-element
                           <img
@@ -196,23 +168,15 @@ export function ServicesManager({ items }: ServicesManagerProps) {
                         ) : null}
                       </div>
                       <div>
-                        <div className="font-medium text-zinc-900">{item.title}</div>
-                        <div className="text-xs text-zinc-500">{item.slug}</div>
+                        <div className="font-medium text-midnight">{item.title}</div>
+                        <div className="text-xs text-muted">{item.slug}</div>
                       </div>
                     </div>
                   </td>
-                  <td className="px-4 py-4 text-zinc-600">{item.bestFor}</td>
-                  <td className="px-4 py-4 text-zinc-600">
-                    {item.highlights.length} items
-                  </td>
+                  <td className="px-4 py-4 text-muted">{item.bestFor}</td>
+                  <td className="px-4 py-4 text-muted">{item.highlights.length} items</td>
                   <td className="px-4 py-4">
-                    <span
-                      className={`rounded-full px-2.5 py-1 text-xs font-medium ${
-                        item.published
-                          ? "bg-emerald-50 text-emerald-700"
-                          : "bg-zinc-100 text-zinc-600"
-                      }`}
-                    >
+                    <span className={item.published ? "published-pill" : "draft-pill"}>
                       {item.published ? "Published" : "Hidden"}
                     </span>
                   </td>
@@ -220,7 +184,7 @@ export function ServicesManager({ items }: ServicesManagerProps) {
                     <button
                       type="button"
                       onClick={() => openEditForm(item)}
-                      className="font-medium text-zinc-900 transition hover:text-amber-700"
+                      className="font-semibold text-deep-plum transition hover:text-dusty-rose"
                     >
                       Edit
                     </button>

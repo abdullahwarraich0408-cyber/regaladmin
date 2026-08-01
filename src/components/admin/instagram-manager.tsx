@@ -53,45 +53,26 @@ export function InstagramManager({ items }: InstagramManagerProps) {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <div>
-          <h2 className="text-2xl font-semibold text-zinc-900">Instagram section</h2>
-          <p className="text-sm text-zinc-500">
-            Manually manage posts shown in the website Instagram carousel. Published
-            items appear on the homepage.
-          </p>
-        </div>
-        <div className="flex flex-wrap gap-2">
-          <button
-            type="button"
-            onClick={loadDemo}
-            disabled={isPending}
-            className="rounded-lg border border-zinc-200 px-4 py-2 text-sm font-medium"
-          >
-            {isPending ? "Working..." : "Load demo data"}
+      <div className="flex flex-wrap items-center justify-end gap-2">
+        <button type="button" onClick={loadDemo} disabled={isPending} className="btn-gold">
+          {isPending ? "Working..." : "Load demo data"}
+        </button>
+        {items.length > 0 ? (
+          <button type="button" onClick={clearAll} disabled={isPending} className="btn-danger">
+            Clear all
           </button>
-          {items.length > 0 ? (
-            <button
-              type="button"
-              onClick={clearAll}
-              disabled={isPending}
-              className="rounded-lg border border-rose-200 px-4 py-2 text-sm font-medium text-rose-700"
-            >
-              Clear all
-            </button>
-          ) : null}
-          <button
-            type="button"
-            onClick={() => setEditing("new")}
-            className="rounded-lg bg-[#12121a] px-4 py-2 text-sm font-medium text-white"
-          >
-            Add post
-          </button>
-        </div>
+        ) : null}
+        <button type="button" onClick={() => setEditing("new")} className="btn-primary">
+          Add post
+        </button>
       </div>
 
-      {error ? <p className="text-sm text-rose-700">{error}</p> : null}
-      {message ? <p className="text-sm text-emerald-700">{message}</p> : null}
+      {error ? (
+        <p className="rounded-xl bg-rose-50 px-4 py-3 text-sm text-rose-700">{error}</p>
+      ) : null}
+      {message ? (
+        <p className="rounded-xl bg-emerald-50 px-4 py-3 text-sm text-emerald-700">{message}</p>
+      ) : null}
 
       <Modal
         open={editing !== null}
@@ -105,25 +86,17 @@ export function InstagramManager({ items }: InstagramManagerProps) {
       </Modal>
 
       {items.length === 0 ? (
-        <div className="rounded-2xl border border-dashed border-zinc-300 bg-white px-6 py-12 text-center">
-          <p className="text-lg font-semibold text-zinc-900">No Instagram posts yet</p>
-          <p className="mt-2 text-sm text-zinc-500">
-            Click Load demo data for sample posts, or Add post to upload your own.
+        <div className="admin-card border-dashed px-6 py-12 text-center">
+          <p className="font-display text-2xl text-midnight">No Instagram posts yet</p>
+          <p className="mx-auto mt-2 max-w-md text-sm text-muted">
+            Add real posts from your feed for social proof on the homepage, or load demo
+            data while testing.
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
-            <button
-              type="button"
-              onClick={loadDemo}
-              disabled={isPending}
-              className="rounded-lg border border-zinc-200 px-4 py-2 text-sm font-medium"
-            >
+            <button type="button" onClick={loadDemo} disabled={isPending} className="btn-gold">
               Load demo data
             </button>
-            <button
-              type="button"
-              onClick={() => setEditing("new")}
-              className="rounded-lg bg-[#12121a] px-4 py-2 text-sm font-medium text-white"
-            >
+            <button type="button" onClick={() => setEditing("new")} className="btn-primary">
               Add post
             </button>
           </div>
@@ -131,11 +104,8 @@ export function InstagramManager({ items }: InstagramManagerProps) {
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
           {items.map((item) => (
-            <article
-              key={item.id}
-              className="overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm"
-            >
-              <div className="aspect-[4/5] bg-zinc-100">
+            <article key={item.id} className="admin-card">
+              <div className="aspect-[4/5] bg-warm-beige">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={resolveMediaUrl(item.imageUrl)}
@@ -144,16 +114,16 @@ export function InstagramManager({ items }: InstagramManagerProps) {
                 />
               </div>
               <div className="space-y-3 p-4">
-                <p className="line-clamp-3 text-sm text-zinc-700">{item.caption}</p>
+                <p className="line-clamp-3 text-sm text-foreground">{item.caption}</p>
                 <div className="flex flex-wrap items-center justify-between gap-2">
-                  <p className="text-xs text-zinc-500">
+                  <p className="text-xs text-muted">
                     {item.published ? "Published" : "Draft"} · Sort {item.sortOrder}
                     {item.isReel || item.isVideo ? " · Reel/Video" : ""}
                   </p>
                   <button
                     type="button"
                     onClick={() => setEditing(item)}
-                    className="rounded-lg border border-zinc-200 px-3 py-1.5 text-sm"
+                    className="btn-secondary !px-3 !py-1.5 text-xs"
                   >
                     Edit
                   </button>

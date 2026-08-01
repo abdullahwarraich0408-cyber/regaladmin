@@ -1,19 +1,77 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f4f4f5;
-  --foreground: #18181b;
+  --background: #f7f3ea;
+  --foreground: #1a1820;
+  --cream: #f7f3ea;
+  --warm-beige: #ebe4d6;
+  --midnight: #1a1820;
+  --deep-plum: #4a2f4f;
+  --dusty-rose: #c4898a;
+  --soft-gold: #c9a84c;
+  --card: #fffcf7;
+  --muted: #6b6570;
+  --border: #e5ddd0;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-cream: var(--cream);
+  --color-warm-beige: var(--warm-beige);
+  --color-midnight: var(--midnight);
+  --color-deep-plum: var(--deep-plum);
+  --color-dusty-rose: var(--dusty-rose);
+  --color-soft-gold: var(--soft-gold);
+  --color-card: var(--card);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-display), Georgia, serif;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+}
+
+.admin-card {
+  @apply overflow-hidden rounded-2xl border border-border bg-card shadow-sm;
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl bg-midnight px-4 py-2.5 text-sm font-semibold text-cream shadow-sm transition hover:bg-deep-plum disabled:opacity-60;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-card px-4 py-2.5 text-sm font-semibold text-foreground transition hover:border-dusty-rose/40 hover:bg-warm-beige/40 disabled:opacity-60;
+}
+
+.btn-danger {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl border border-rose-200 bg-rose-50 px-4 py-2.5 text-sm font-semibold text-rose-700 transition hover:bg-rose-100 disabled:opacity-60;
+}
+
+.btn-gold {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl border border-soft-gold/30 bg-soft-gold/15 px-4 py-2.5 text-sm font-semibold text-midnight transition hover:bg-soft-gold/25 disabled:opacity-60;
+}
+
+.eyebrow {
+  @apply text-[11px] font-semibold uppercase tracking-[0.2em] text-soft-gold;
+}
+
+.published-pill {
+  @apply inline-flex rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-medium text-emerald-700 ring-1 ring-emerald-100;
+}
+
+.draft-pill {
+  @apply inline-flex rounded-full bg-warm-beige px-2.5 py-1 text-xs font-medium text-muted ring-1 ring-border;
+}
+
+.field-label {
+  @apply text-sm font-medium text-midnight;
+}
+
+.field-input {
+  @apply w-full rounded-xl border border-border bg-card px-3 py-2 text-sm text-foreground outline-none transition placeholder:text-muted/60 focus:border-soft-gold focus:ring-2 focus:ring-soft-gold/20;
 }

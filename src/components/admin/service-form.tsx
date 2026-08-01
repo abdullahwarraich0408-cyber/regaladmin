@@ -119,39 +119,39 @@ export function ServiceForm({ item, onCancel }: ServiceFormProps) {
       className="space-y-5 p-6"
     >
       <div>
-        <h3 className="text-lg font-semibold text-zinc-900">
+        <h3 className="text-lg font-semibold text-midnight">
           {item ? "Edit service" : "Add service"}
         </h3>
-        <p className="text-sm text-zinc-500">
+        <p className="text-sm text-muted">
           Published services appear on the homepage showcase and services page.
         </p>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="block space-y-2">
-          <span className="text-sm font-medium text-zinc-700">Title</span>
+          <span className="text-sm font-medium text-midnight">Title</span>
           <input
             required
             value={form.title}
             onChange={(event) =>
               setForm((current) => ({ ...current, title: event.target.value }))
             }
-            className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm outline-none focus:border-amber-400"
+            className="w-full rounded-lg border border-border px-3 py-2 text-sm outline-none focus:border-soft-gold"
             placeholder="Wedding Decor"
           />
         </label>
 
         <label className="block space-y-2">
-          <span className="text-sm font-medium text-zinc-700">
+          <span className="text-sm font-medium text-midnight">
             Slug{" "}
-            <span className="font-normal text-zinc-400">(optional)</span>
+            <span className="font-normal text-muted/70">(optional)</span>
           </span>
           <input
             value={form.slug ?? ""}
             onChange={(event) =>
               setForm((current) => ({ ...current, slug: event.target.value }))
             }
-            className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm outline-none focus:border-amber-400"
+            className="w-full rounded-lg border border-border px-3 py-2 text-sm outline-none focus:border-soft-gold"
             placeholder="Leave blank to auto-generate"
           />
         </label>
@@ -159,20 +159,20 @@ export function ServiceForm({ item, onCancel }: ServiceFormProps) {
 
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="block space-y-2">
-          <span className="text-sm font-medium text-zinc-700">Best for</span>
+          <span className="text-sm font-medium text-midnight">Best for</span>
           <input
             required
             value={form.bestFor}
             onChange={(event) =>
               setForm((current) => ({ ...current, bestFor: event.target.value }))
             }
-            className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm outline-none focus:border-amber-400"
+            className="w-full rounded-lg border border-border px-3 py-2 text-sm outline-none focus:border-soft-gold"
             placeholder="Brides & couples"
           />
         </label>
 
         <label className="block space-y-2">
-          <span className="text-sm font-medium text-zinc-700">Icon</span>
+          <span className="text-sm font-medium text-midnight">Icon</span>
           <select
             value={form.icon}
             onChange={(event) =>
@@ -181,7 +181,7 @@ export function ServiceForm({ item, onCancel }: ServiceFormProps) {
                 icon: event.target.value as ServiceInput["icon"],
               }))
             }
-            className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm outline-none focus:border-amber-400"
+            className="w-full rounded-lg border border-border px-3 py-2 text-sm outline-none focus:border-soft-gold"
           >
             {SERVICE_ICONS.map((icon) => (
               <option key={icon} value={icon}>
@@ -193,9 +193,9 @@ export function ServiceForm({ item, onCancel }: ServiceFormProps) {
       </div>
 
       <label className="block space-y-2">
-        <span className="text-sm font-medium text-zinc-700">
+        <span className="text-sm font-medium text-midnight">
           Short description{" "}
-          <span className="font-normal text-zinc-400">(min 10 characters)</span>
+          <span className="font-normal text-muted/70">(min 10 characters)</span>
         </span>
         <textarea
           required
@@ -209,7 +209,7 @@ export function ServiceForm({ item, onCancel }: ServiceFormProps) {
               shortDescription: event.target.value,
             }))
           }
-          className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm outline-none focus:border-amber-400"
+          className="w-full rounded-lg border border-border px-3 py-2 text-sm outline-none focus:border-soft-gold"
         />
       </label>
 
@@ -221,9 +221,9 @@ export function ServiceForm({ item, onCancel }: ServiceFormProps) {
       />
 
       <label className="block space-y-2">
-        <span className="text-sm font-medium text-zinc-700">
+        <span className="text-sm font-medium text-midnight">
           Long description{" "}
-          <span className="font-normal text-zinc-400">(min 20 characters)</span>
+          <span className="font-normal text-muted/70">(min 20 characters)</span>
         </span>
         <textarea
           required
@@ -237,26 +237,26 @@ export function ServiceForm({ item, onCancel }: ServiceFormProps) {
               longDescription: event.target.value,
             }))
           }
-          className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm outline-none focus:border-amber-400"
+          className="w-full rounded-lg border border-border px-3 py-2 text-sm outline-none focus:border-soft-gold"
         />
       </label>
 
       <label className="block space-y-2">
-        <span className="text-sm font-medium text-zinc-700">
+        <span className="text-sm font-medium text-midnight">
           What's included (one item per line)
         </span>
         <textarea
           rows={5}
           value={highlightsText}
           onChange={(event) => setHighlightsText(event.target.value)}
-          className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm outline-none focus:border-amber-400"
+          className="w-full rounded-lg border border-border px-3 py-2 text-sm outline-none focus:border-soft-gold"
           placeholder={"Ceremony Arches & Aisles\nBespoke Table Settings"}
         />
       </label>
 
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="block space-y-2">
-          <span className="text-sm font-medium text-zinc-700">Sort order</span>
+          <span className="text-sm font-medium text-midnight">Sort order</span>
           <input
             type="number"
             min={0}
@@ -267,7 +267,7 @@ export function ServiceForm({ item, onCancel }: ServiceFormProps) {
                 sortOrder: Number(event.target.value),
               }))
             }
-            className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm outline-none focus:border-amber-400"
+            className="w-full rounded-lg border border-border px-3 py-2 text-sm outline-none focus:border-soft-gold"
           />
         </label>
 
@@ -281,9 +281,9 @@ export function ServiceForm({ item, onCancel }: ServiceFormProps) {
                 published: event.target.checked,
               }))
             }
-            className="h-4 w-4 rounded border-zinc-300"
+            className="h-4 w-4 rounded border-border"
           />
-          <span className="text-sm font-medium text-zinc-700">
+          <span className="text-sm font-medium text-midnight">
             Published on website
           </span>
         </label>
@@ -299,14 +299,14 @@ export function ServiceForm({ item, onCancel }: ServiceFormProps) {
         <button
           type="submit"
           disabled={isPending}
-          className="rounded-lg bg-[#12121a] px-4 py-2 text-sm font-medium text-white transition hover:bg-zinc-800 disabled:opacity-60"
+          className="btn-primary"
         >
           {isPending ? "Saving..." : item ? "Save changes" : "Add service"}
         </button>
         <button
           type="button"
           onClick={onCancel}
-          className="rounded-lg border border-zinc-200 px-4 py-2 text-sm font-medium text-zinc-700 transition hover:bg-zinc-50"
+          className="btn-secondary"
         >
           Cancel
         </button>

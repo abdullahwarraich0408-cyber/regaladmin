@@ -39,17 +39,10 @@ export default async function DashboardPage() {
       <section className="space-y-4">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
-            <h3 className="text-lg font-semibold text-zinc-900">
-              Recent bookings
-            </h3>
-            <p className="text-sm text-zinc-500">
-              Latest requests from the public website
-            </p>
+            <h3 className="font-display text-2xl text-midnight">Recent bookings</h3>
+            <p className="text-sm text-muted">Latest requests from the public website</p>
           </div>
-          <Link
-            href="/bookings"
-            className="inline-flex items-center gap-2 rounded-xl bg-[#12121a] px-4 py-2.5 text-sm font-medium text-white shadow-sm transition hover:bg-zinc-800"
-          >
+          <Link href="/bookings" className="btn-primary">
             View all
             <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4" aria-hidden>
               <path
