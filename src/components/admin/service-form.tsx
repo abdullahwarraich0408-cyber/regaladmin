@@ -142,14 +142,17 @@ export function ServiceForm({ item, onCancel }: ServiceFormProps) {
         </label>
 
         <label className="block space-y-2">
-          <span className="text-sm font-medium text-zinc-700">Slug</span>
+          <span className="text-sm font-medium text-zinc-700">
+            Slug{" "}
+            <span className="font-normal text-zinc-400">(optional)</span>
+          </span>
           <input
             value={form.slug ?? ""}
             onChange={(event) =>
               setForm((current) => ({ ...current, slug: event.target.value }))
             }
             className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm outline-none focus:border-amber-400"
-            placeholder="wedding-decor"
+            placeholder="Leave blank to auto-generate"
           />
         </label>
       </div>
@@ -190,9 +193,14 @@ export function ServiceForm({ item, onCancel }: ServiceFormProps) {
       </div>
 
       <label className="block space-y-2">
-        <span className="text-sm font-medium text-zinc-700">Short description</span>
+        <span className="text-sm font-medium text-zinc-700">
+          Short description{" "}
+          <span className="font-normal text-zinc-400">(min 10 characters)</span>
+        </span>
         <textarea
           required
+          minLength={10}
+          maxLength={300}
           rows={2}
           value={form.shortDescription}
           onChange={(event) =>
@@ -213,9 +221,14 @@ export function ServiceForm({ item, onCancel }: ServiceFormProps) {
       />
 
       <label className="block space-y-2">
-        <span className="text-sm font-medium text-zinc-700">Long description</span>
+        <span className="text-sm font-medium text-zinc-700">
+          Long description{" "}
+          <span className="font-normal text-zinc-400">(min 20 characters)</span>
+        </span>
         <textarea
           required
+          minLength={20}
+          maxLength={2000}
           rows={4}
           value={form.longDescription}
           onChange={(event) =>

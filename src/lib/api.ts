@@ -244,16 +244,43 @@ export async function getServices(): Promise<ServiceItem[]> {
   return data.items;
 }
 
+function formatApiError(
+  body: { error?: string; fieldErrors?: Record<string, string[]> },
+  fallback: string
+) {
+  const fieldMessages = body.fieldErrors
+    ? Object.entries(body.fieldErrors)
+        .flatMap(([field, messages]) =>
+          (messages ?? []).map((message) => `${field}: ${message}`)
+        )
+        .join("; ")
+    : "";
+
+  if (fieldMessages) {
+    return fieldMessages;
+  }
+
+  return body.error ?? fallback;
+}
+
 export async function createService(input: ServiceInput): Promise<ServiceItem> {
+  const { slug, imageUrl, ...rest } = input;
   const response = await fetch(`${API_URL}/api/services`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(input),
+    body: JSON.stringify({
+      ...rest,
+      ...(slug?.trim() ? { slug: slug.trim() } : {}),
+      ...(imageUrl?.trim() ? { imageUrl: imageUrl.trim() } : {}),
+    }),
   });
 
   if (!response.ok) {
-    const body = (await response.json().catch(() => ({}))) as { error?: string };
-    throw new Error(body.error ?? "Failed to create service");
+    const body = (await response.json().catch(() => ({}))) as {
+      error?: string;
+      fieldErrors?: Record<string, string[]>;
+    };
+    throw new Error(formatApiError(body, "Failed to create service"));
   }
 
   const data = (await response.json()) as { item: ServiceItem };
@@ -264,15 +291,29 @@ export async function updateService(
   id: string,
   input: Partial<ServiceInput>
 ): Promise<ServiceItem> {
+  const { slug, imageUrl, ...rest } = input;
   const response = await fetch(`${API_URL}/api/services/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(input),
+    body: JSON.stringify({
+      ...rest,
+      ...(slug !== undefined
+        ? slug.trim()
+          ? { slug: slug.trim() }
+          : { slug: undefined }
+        : {}),
+      ...(imageUrl !== undefined
+        ? { imageUrl: imageUrl.trim() || "" }
+        : {}),
+    }),
   });
 
   if (!response.ok) {
-    const body = (await response.json().catch(() => ({}))) as { error?: string };
-    throw new Error(body.error ?? "Failed to update service");
+    const body = (await response.json().catch(() => ({}))) as {
+      error?: string;
+      fieldErrors?: Record<string, string[]>;
+    };
+    throw new Error(formatApiError(body, "Failed to update service"));
   }
 
   const data = (await response.json()) as { item: ServiceItem };
