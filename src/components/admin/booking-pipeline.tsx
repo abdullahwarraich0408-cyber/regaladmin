@@ -3,10 +3,10 @@ import { BOOKING_STATUSES, STATUS_LABELS } from "@/lib/types";
 
 const pipelineColors: Record<BookingStatus, string> = {
   new: "bg-sky-500",
-  contacted: "bg-violet-500",
-  quoted: "bg-amber-500",
+  contacted: "bg-deep-plum",
+  quoted: "bg-soft-gold",
   confirmed: "bg-emerald-500",
-  declined: "bg-rose-400",
+  declined: "bg-dusty-rose",
 };
 
 interface BookingPipelineProps {
@@ -26,9 +26,9 @@ export function BookingPipeline({ bookings }: BookingPipelineProps) {
 
   if (total === 0) {
     return (
-      <section className="rounded-2xl border border-zinc-200/80 bg-white p-6 shadow-sm">
-        <h3 className="text-sm font-semibold text-zinc-900">Booking pipeline</h3>
-        <p className="mt-2 text-sm text-zinc-500">
+      <section className="admin-card p-6">
+        <h3 className="font-display text-xl text-midnight">Booking pipeline</h3>
+        <p className="mt-2 text-sm text-muted">
           Status breakdown will appear once bookings come in.
         </p>
       </section>
@@ -36,20 +36,20 @@ export function BookingPipeline({ bookings }: BookingPipelineProps) {
   }
 
   return (
-    <section className="rounded-2xl border border-zinc-200/80 bg-white p-6 shadow-sm">
+    <section className="admin-card p-6">
       <div className="mb-5 flex items-start justify-between gap-4">
         <div>
-          <h3 className="text-sm font-semibold text-zinc-900">Booking pipeline</h3>
-          <p className="mt-1 text-sm text-zinc-500">
+          <h3 className="font-display text-xl text-midnight">Booking pipeline</h3>
+          <p className="mt-1 text-sm text-muted">
             How requests are moving through your workflow
           </p>
         </div>
-        <span className="rounded-full bg-zinc-100 px-3 py-1 text-xs font-medium text-zinc-600">
+        <span className="rounded-full bg-warm-beige px-3 py-1 text-xs font-medium text-muted">
           {total} total
         </span>
       </div>
 
-      <div className="flex h-3 overflow-hidden rounded-full bg-zinc-100">
+      <div className="flex h-3 overflow-hidden rounded-full bg-warm-beige">
         {BOOKING_STATUSES.map((status) => {
           const count = counts[status];
           if (count === 0) return null;
@@ -76,9 +76,9 @@ export function BookingPipeline({ bookings }: BookingPipelineProps) {
               <span
                 className={`h-2.5 w-2.5 shrink-0 rounded-full ${pipelineColors[status]}`}
               />
-              <span className="text-zinc-600">{STATUS_LABELS[status]}</span>
-              <span className="font-medium text-zinc-900">{count}</span>
-              <span className="text-zinc-400">({pct}%)</span>
+              <span className="text-muted">{STATUS_LABELS[status]}</span>
+              <span className="font-medium text-midnight">{count}</span>
+              <span className="text-muted/70">({pct}%)</span>
             </div>
           );
         })}

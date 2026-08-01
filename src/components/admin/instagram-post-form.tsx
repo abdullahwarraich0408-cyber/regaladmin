@@ -94,13 +94,13 @@ export function InstagramPostForm({ item, onCancel }: InstagramPostFormProps) {
       </h3>
 
       <label className="block space-y-2">
-        <span className="text-sm font-medium text-zinc-700">Caption</span>
+        <span className="text-sm font-medium text-midnight">Caption</span>
         <textarea
           required
           rows={4}
           value={form.caption}
           onChange={(e) => setForm((c) => ({ ...c, caption: e.target.value }))}
-          className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm"
+          className="w-full rounded-lg border border-border px-3 py-2 text-sm"
           placeholder="Describe the event or styling moment..."
         />
       </label>
@@ -113,28 +113,28 @@ export function InstagramPostForm({ item, onCancel }: InstagramPostFormProps) {
       />
 
       <label className="block space-y-2">
-        <span className="text-sm font-medium text-zinc-700">Video URL (optional)</span>
+        <span className="text-sm font-medium text-midnight">Video URL (optional)</span>
         <input
           value={form.videoUrl ?? ""}
           onChange={(e) => setForm((c) => ({ ...c, videoUrl: e.target.value }))}
-          className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm"
+          className="w-full rounded-lg border border-border px-3 py-2 text-sm"
           placeholder="https://...mp4"
         />
       </label>
 
       <label className="block space-y-2">
-        <span className="text-sm font-medium text-zinc-700">Instagram post URL (optional)</span>
+        <span className="text-sm font-medium text-midnight">Instagram post URL (optional)</span>
         <input
           value={form.postUrl ?? ""}
           onChange={(e) => setForm((c) => ({ ...c, postUrl: e.target.value }))}
-          className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm"
+          className="w-full rounded-lg border border-border px-3 py-2 text-sm"
           placeholder="https://www.instagram.com/p/..."
         />
       </label>
 
       <div className="grid gap-4 sm:grid-cols-3">
         <label className="block space-y-2">
-          <span className="text-sm font-medium text-zinc-700">Likes</span>
+          <span className="text-sm font-medium text-midnight">Likes</span>
           <input
             type="number"
             min={0}
@@ -142,11 +142,11 @@ export function InstagramPostForm({ item, onCancel }: InstagramPostFormProps) {
             onChange={(e) =>
               setForm((c) => ({ ...c, likes: Number(e.target.value) || 0 }))
             }
-            className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm"
+            className="w-full rounded-lg border border-border px-3 py-2 text-sm"
           />
         </label>
         <label className="block space-y-2">
-          <span className="text-sm font-medium text-zinc-700">Sort order</span>
+          <span className="text-sm font-medium text-midnight">Sort order</span>
           <input
             type="number"
             min={0}
@@ -154,7 +154,7 @@ export function InstagramPostForm({ item, onCancel }: InstagramPostFormProps) {
             onChange={(e) =>
               setForm((c) => ({ ...c, sortOrder: Number(e.target.value) || 0 }))
             }
-            className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm"
+            className="w-full rounded-lg border border-border px-3 py-2 text-sm"
           />
         </label>
         <label className="flex items-center gap-3 pt-8">
@@ -192,7 +192,7 @@ export function InstagramPostForm({ item, onCancel }: InstagramPostFormProps) {
         <button
           type="submit"
           disabled={isPending}
-          className="rounded-lg bg-[#12121a] px-4 py-2 text-sm font-medium text-white"
+          className="btn-primary"
         >
           {isPending ? "Saving..." : "Save"}
         </button>

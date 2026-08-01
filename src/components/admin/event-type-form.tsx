@@ -87,29 +87,29 @@ export function EventTypeForm({ item, onCancel }: EventTypeFormProps) {
       className="space-y-5 p-6"
     >
       <div>
-        <h3 className="text-lg font-semibold text-zinc-900">
+        <h3 className="text-lg font-semibold text-midnight">
           {item ? "Edit event type" : "Add event type"}
         </h3>
-        <p className="text-sm text-zinc-500">
+        <p className="text-sm text-muted">
           Published types appear on the Plan My Event booking form.
         </p>
       </div>
 
       <label className="block space-y-2">
-        <span className="text-sm font-medium text-zinc-700">Name</span>
+        <span className="text-sm font-medium text-midnight">Name</span>
         <input
           required
           value={form.name}
           onChange={(event) =>
             setForm((current) => ({ ...current, name: event.target.value }))
           }
-          className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm outline-none focus:border-amber-400"
+          className="w-full rounded-lg border border-border px-3 py-2 text-sm outline-none focus:border-soft-gold"
           placeholder="Wedding"
         />
       </label>
 
       <label className="block space-y-2">
-        <span className="text-sm font-medium text-zinc-700">Icon</span>
+        <span className="text-sm font-medium text-midnight">Icon</span>
         <select
           value={form.icon}
           onChange={(event) =>
@@ -118,7 +118,7 @@ export function EventTypeForm({ item, onCancel }: EventTypeFormProps) {
               icon: event.target.value as EventTypeInput["icon"],
             }))
           }
-          className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm outline-none focus:border-amber-400"
+          className="w-full rounded-lg border border-border px-3 py-2 text-sm outline-none focus:border-soft-gold"
         >
           {EVENT_TYPE_ICONS.map((icon) => (
             <option key={icon} value={icon}>
@@ -130,7 +130,7 @@ export function EventTypeForm({ item, onCancel }: EventTypeFormProps) {
 
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="block space-y-2">
-          <span className="text-sm font-medium text-zinc-700">Sort order</span>
+          <span className="text-sm font-medium text-midnight">Sort order</span>
           <input
             type="number"
             min={0}
@@ -141,7 +141,7 @@ export function EventTypeForm({ item, onCancel }: EventTypeFormProps) {
                 sortOrder: Number(event.target.value),
               }))
             }
-            className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm outline-none focus:border-amber-400"
+            className="w-full rounded-lg border border-border px-3 py-2 text-sm outline-none focus:border-soft-gold"
           />
         </label>
 
@@ -155,9 +155,9 @@ export function EventTypeForm({ item, onCancel }: EventTypeFormProps) {
                 published: event.target.checked,
               }))
             }
-            className="h-4 w-4 rounded border-zinc-300"
+            className="h-4 w-4 rounded border-border"
           />
-          <span className="text-sm font-medium text-zinc-700">
+          <span className="text-sm font-medium text-midnight">
             Published on booking form
           </span>
         </label>
@@ -173,14 +173,14 @@ export function EventTypeForm({ item, onCancel }: EventTypeFormProps) {
         <button
           type="submit"
           disabled={isPending}
-          className="rounded-lg bg-[#12121a] px-4 py-2 text-sm font-medium text-white transition hover:bg-zinc-800 disabled:opacity-60"
+          className="btn-primary"
         >
           {isPending ? "Saving..." : item ? "Save changes" : "Add event type"}
         </button>
         <button
           type="button"
           onClick={onCancel}
-          className="rounded-lg border border-zinc-200 px-4 py-2 text-sm font-medium text-zinc-700 transition hover:bg-zinc-50"
+          className="btn-secondary"
         >
           Cancel
         </button>

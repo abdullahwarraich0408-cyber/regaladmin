@@ -113,80 +113,50 @@ export function PortfolioManager({ items }: PortfolioManagerProps) {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <div>
-          <h3 className="text-lg font-semibold text-zinc-900">Portfolio items</h3>
-          <p className="text-sm text-zinc-500">
-            All website portfolio content is managed here. Nothing is shown on
-            the public site until you add it.
-          </p>
-        </div>
-        <div className="flex flex-wrap gap-3">
-            {items.length === 0 ? (
-              <>
-                <button
-                  type="button"
-                  onClick={loadDemoData}
-                  disabled={isPending}
-                  className="rounded-lg border border-amber-300 bg-amber-50 px-4 py-2 text-sm font-medium text-amber-900 transition hover:bg-amber-100 disabled:opacity-60"
-                >
-                  {isPending ? "Loading demo..." : "Load demo data"}
-                </button>
-                <button
-                  type="button"
-                  onClick={importFromInstagram}
-                  disabled={isPending}
-                  className="rounded-lg border border-violet-200 bg-violet-50 px-4 py-2 text-sm font-medium text-violet-900 transition hover:bg-violet-100 disabled:opacity-60"
-                >
-                  {isPending ? "Importing..." : "Import from Instagram"}
-                </button>
-              </>
-            ) : (
-              <>
-                <button
-                  type="button"
-                  onClick={importFromInstagram}
-                  disabled={isPending}
-                  className="rounded-lg border border-violet-200 bg-violet-50 px-4 py-2 text-sm font-medium text-violet-900 transition hover:bg-violet-100 disabled:opacity-60"
-                >
-                  {isPending ? "Importing..." : "Import from Instagram"}
-                </button>
-                <button
-                  type="button"
-                  onClick={clearAll}
-                  disabled={isPending}
-                  className="rounded-lg border border-rose-200 px-4 py-2 text-sm font-medium text-rose-700 transition hover:bg-rose-50 disabled:opacity-60"
-                >
-                  Clear all
-                </button>
-                <button
-                  type="button"
-                  onClick={reloadDemoData}
-                  disabled={isPending}
-                  className="rounded-lg border border-amber-300 bg-amber-50 px-4 py-2 text-sm font-medium text-amber-900 transition hover:bg-amber-100 disabled:opacity-60"
-                >
-                  Reload demo data
-                </button>
-              </>
-            )}
+      <div className="flex flex-wrap items-center justify-end gap-3">
+        {items.length === 0 ? (
+          <>
+            <button type="button" onClick={loadDemoData} disabled={isPending} className="btn-gold">
+              {isPending ? "Loading demo..." : "Load demo data"}
+            </button>
             <button
               type="button"
-              onClick={openCreateForm}
-              className="rounded-lg bg-[#12121a] px-4 py-2 text-sm font-medium text-white transition hover:bg-zinc-800"
+              onClick={importFromInstagram}
+              disabled={isPending}
+              className="btn-secondary"
             >
-              Add item
+              {isPending ? "Importing..." : "Import from Instagram"}
             </button>
-          </div>
+          </>
+        ) : (
+          <>
+            <button
+              type="button"
+              onClick={importFromInstagram}
+              disabled={isPending}
+              className="btn-secondary"
+            >
+              {isPending ? "Importing..." : "Import from Instagram"}
+            </button>
+            <button type="button" onClick={clearAll} disabled={isPending} className="btn-danger">
+              Clear all
+            </button>
+            <button type="button" onClick={reloadDemoData} disabled={isPending} className="btn-gold">
+              Reload demo data
+            </button>
+          </>
+        )}
+        <button type="button" onClick={openCreateForm} className="btn-primary">
+          Add item
+        </button>
       </div>
 
       {demoError ? (
-        <p className="rounded-lg bg-rose-50 px-3 py-2 text-sm text-rose-700">
-          {demoError}
-        </p>
+        <p className="rounded-xl bg-rose-50 px-4 py-3 text-sm text-rose-700">{demoError}</p>
       ) : null}
 
       {importMessage ? (
-        <p className="rounded-lg bg-emerald-50 px-3 py-2 text-sm text-emerald-800">
+        <p className="rounded-xl bg-emerald-50 px-4 py-3 text-sm text-emerald-800">
           {importMessage}
         </p>
       ) : null}
@@ -200,18 +170,18 @@ export function PortfolioManager({ items }: PortfolioManagerProps) {
       </Modal>
 
       {items.length === 0 ? (
-        <div className="rounded-2xl border border-dashed border-zinc-200 bg-white p-10 text-center">
-          <p className="text-lg font-medium text-zinc-900">No portfolio items yet</p>
-          <p className="mt-2 text-sm text-zinc-500">
-            Click <strong>Import from Instagram</strong> to pull your latest event photos,
-            or <strong>Load demo data</strong> for sample stories with images.
+        <div className="admin-card border-dashed p-10 text-center">
+          <p className="font-display text-2xl text-midnight">No portfolio items yet</p>
+          <p className="mx-auto mt-2 max-w-md text-sm text-muted">
+            Import from Instagram for real event photos, or load demo data for sample
+            stories. Prefer real client work on production.
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <button
               type="button"
               onClick={importFromInstagram}
               disabled={isPending}
-              className="rounded-lg border border-violet-200 bg-violet-50 px-4 py-2 text-sm font-medium text-violet-900 transition hover:bg-violet-100 disabled:opacity-60"
+              className="btn-secondary"
             >
               {isPending ? "Importing..." : "Import from Instagram"}
             </button>
@@ -219,7 +189,7 @@ export function PortfolioManager({ items }: PortfolioManagerProps) {
               type="button"
               onClick={loadDemoData}
               disabled={isPending}
-              className="rounded-lg bg-[#12121a] px-4 py-2 text-sm font-medium text-white transition hover:bg-zinc-800 disabled:opacity-60"
+              className="btn-gold"
             >
               {isPending ? "Loading demo..." : "Load demo data"}
             </button>
@@ -231,10 +201,7 @@ export function PortfolioManager({ items }: PortfolioManagerProps) {
             const [colorA, colorB] = item.palette;
 
             return (
-              <article
-                key={item.id}
-                className="overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm"
-              >
+              <article key={item.id} className="admin-card">
                 <div className="relative aspect-[16/10] overflow-hidden">
                   {item.imageUrl ? (
                     // eslint-disable-next-line @next/next/no-img-element
@@ -256,30 +223,24 @@ export function PortfolioManager({ items }: PortfolioManagerProps) {
                 <div className="space-y-3 p-5">
                   <div className="flex items-start justify-between gap-3">
                     <div>
-                      <p className="text-xs uppercase tracking-wide text-zinc-500">
+                      <p className="text-xs uppercase tracking-wide text-muted">
                         {item.category}
                       </p>
-                      <h4 className="mt-1 text-lg font-semibold text-zinc-900">
+                      <h4 className="mt-1 font-display text-xl text-midnight">
                         {item.title}
                       </h4>
                     </div>
-                    <span
-                      className={`rounded-full px-2.5 py-1 text-xs font-medium ${
-                        item.published
-                          ? "bg-emerald-50 text-emerald-700"
-                          : "bg-zinc-100 text-zinc-600"
-                      }`}
-                    >
+                    <span className={item.published ? "published-pill" : "draft-pill"}>
                       {item.published ? "Published" : "Hidden"}
                     </span>
                   </div>
 
-                  <div className="flex items-center justify-between text-sm text-zinc-500">
+                  <div className="flex items-center justify-between text-sm text-muted">
                     <span>Sort order: {item.sortOrder}</span>
                     <button
                       type="button"
                       onClick={() => openEditForm(item)}
-                      className="font-medium text-zinc-900 transition hover:text-amber-700"
+                      className="font-semibold text-midnight transition hover:text-deep-plum"
                     >
                       Edit
                     </button>

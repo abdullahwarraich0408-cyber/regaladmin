@@ -97,34 +97,34 @@ export function PortfolioForm({ item, onCancel }: PortfolioFormProps) {
   return (
     <form onSubmit={onSubmit} className="space-y-5 p-6">
       <div>
-        <h3 className="text-lg font-semibold text-zinc-900">
+        <h3 className="text-lg font-semibold text-midnight">
           {item ? "Edit portfolio story" : "Add portfolio story"}
         </h3>
-        <p className="text-sm text-zinc-500">
+        <p className="text-sm text-muted">
           Real event content only — cover image, gallery, and story details appear on the website.
         </p>
       </div>
 
       <label className="block space-y-2">
-        <span className="text-sm font-medium text-zinc-700">Event title</span>
+        <span className="text-sm font-medium text-midnight">Event title</span>
         <input
           required
           value={form.title}
           onChange={(e) => setForm((c) => ({ ...c, title: e.target.value }))}
-          className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm outline-none focus:border-amber-400"
+          className="w-full rounded-lg border border-border px-3 py-2 text-sm outline-none focus:border-soft-gold"
           placeholder="Champagne & Ivory Reception"
         />
       </label>
 
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="block space-y-2">
-          <span className="text-sm font-medium text-zinc-700">Category</span>
+          <span className="text-sm font-medium text-midnight">Category</span>
           <select
             value={form.category}
             onChange={(e) =>
               setForm((c) => ({ ...c, category: e.target.value as PortfolioInput["category"] }))
             }
-            className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm outline-none focus:border-amber-400"
+            className="w-full rounded-lg border border-border px-3 py-2 text-sm outline-none focus:border-soft-gold"
           >
             {PORTFOLIO_CATEGORIES.map((category) => (
               <option key={category} value={category}>
@@ -134,11 +134,11 @@ export function PortfolioForm({ item, onCancel }: PortfolioFormProps) {
           </select>
         </label>
         <label className="block space-y-2">
-          <span className="text-sm font-medium text-zinc-700">Client name</span>
+          <span className="text-sm font-medium text-midnight">Client name</span>
           <input
             value={form.clientName ?? ""}
             onChange={(e) => setForm((c) => ({ ...c, clientName: e.target.value }))}
-            className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm outline-none focus:border-amber-400"
+            className="w-full rounded-lg border border-border px-3 py-2 text-sm outline-none focus:border-soft-gold"
             placeholder="Sarah & James"
           />
         </label>
@@ -158,47 +158,47 @@ export function PortfolioForm({ item, onCancel }: PortfolioFormProps) {
       />
 
       <label className="block space-y-2">
-        <span className="text-sm font-medium text-zinc-700">Event story</span>
+        <span className="text-sm font-medium text-midnight">Event story</span>
         <textarea
           value={form.description ?? ""}
           onChange={(e) => setForm((c) => ({ ...c, description: e.target.value }))}
           rows={4}
-          className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm outline-none focus:border-amber-400"
+          className="w-full rounded-lg border border-border px-3 py-2 text-sm outline-none focus:border-soft-gold"
           placeholder="Describe the event, styling approach, and outcome..."
         />
       </label>
 
       <label className="block space-y-2">
-        <span className="text-sm font-medium text-zinc-700">Highlights</span>
+        <span className="text-sm font-medium text-midnight">Highlights</span>
         <textarea
           value={highlightsText}
           onChange={(e) => setHighlightsText(e.target.value)}
           rows={4}
-          className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm outline-none focus:border-amber-400"
+          className="w-full rounded-lg border border-border px-3 py-2 text-sm outline-none focus:border-soft-gold"
           placeholder="One highlight per line"
         />
       </label>
 
       <label className="block space-y-2">
-        <span className="text-sm font-medium text-zinc-700">Instagram post URL</span>
+        <span className="text-sm font-medium text-midnight">Instagram post URL</span>
         <input
           type="url"
           value={form.instagramUrl ?? ""}
           onChange={(e) => setForm((c) => ({ ...c, instagramUrl: e.target.value }))}
-          className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm outline-none focus:border-amber-400"
+          className="w-full rounded-lg border border-border px-3 py-2 text-sm outline-none focus:border-soft-gold"
           placeholder="https://instagram.com/p/..."
         />
       </label>
 
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="block space-y-2">
-          <span className="text-sm font-medium text-zinc-700">Sort order</span>
+          <span className="text-sm font-medium text-midnight">Sort order</span>
           <input
             type="number"
             min={0}
             value={form.sortOrder}
             onChange={(e) => setForm((c) => ({ ...c, sortOrder: Number(e.target.value) }))}
-            className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm outline-none focus:border-amber-400"
+            className="w-full rounded-lg border border-border px-3 py-2 text-sm outline-none focus:border-soft-gold"
           />
         </label>
         <label className="flex items-center gap-3 pt-8">
@@ -206,9 +206,9 @@ export function PortfolioForm({ item, onCancel }: PortfolioFormProps) {
             type="checkbox"
             checked={form.published}
             onChange={(e) => setForm((c) => ({ ...c, published: e.target.checked }))}
-            className="h-4 w-4 rounded border-zinc-300"
+            className="h-4 w-4 rounded border-border"
           />
-          <span className="text-sm font-medium text-zinc-700">Published on website</span>
+          <span className="text-sm font-medium text-midnight">Published on website</span>
         </label>
       </div>
 
@@ -220,11 +220,11 @@ export function PortfolioForm({ item, onCancel }: PortfolioFormProps) {
         <button
           type="submit"
           disabled={isPending}
-          className="rounded-lg bg-[#12121a] px-4 py-2 text-sm font-medium text-white transition hover:bg-zinc-800 disabled:opacity-60"
+          className="btn-primary"
         >
           {isPending ? "Saving..." : item ? "Save changes" : "Add story"}
         </button>
-        <button type="button" onClick={onCancel} className="rounded-lg border border-zinc-200 px-4 py-2 text-sm font-medium text-zinc-700">
+        <button type="button" onClick={onCancel} className="btn-secondary">
           Cancel
         </button>
         {item ? (

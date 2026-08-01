@@ -91,57 +91,28 @@ export function EventTypesManager({ items }: EventTypesManagerProps) {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <div>
-          <h3 className="text-lg font-semibold text-zinc-900">Event types</h3>
-          <p className="text-sm text-zinc-500">
-            Manage the options shown on step 1 of the booking form.
-          </p>
-        </div>
-        <div className="flex flex-wrap gap-3">
-            {items.length === 0 ? (
-              <button
-                type="button"
-                onClick={loadDemoData}
-                disabled={isPending}
-                className="rounded-lg border border-amber-300 bg-amber-50 px-4 py-2 text-sm font-medium text-amber-900 transition hover:bg-amber-100 disabled:opacity-60"
-              >
-                {isPending ? "Loading demo..." : "Load demo data"}
-              </button>
-            ) : (
-              <>
-                <button
-                  type="button"
-                  onClick={clearAll}
-                  disabled={isPending}
-                  className="rounded-lg border border-rose-200 px-4 py-2 text-sm font-medium text-rose-700 transition hover:bg-rose-50 disabled:opacity-60"
-                >
-                  Clear all
-                </button>
-                <button
-                  type="button"
-                  onClick={reloadDemoData}
-                  disabled={isPending}
-                  className="rounded-lg border border-amber-300 bg-amber-50 px-4 py-2 text-sm font-medium text-amber-900 transition hover:bg-amber-100 disabled:opacity-60"
-                >
-                  Reload demo data
-                </button>
-              </>
-            )}
-            <button
-              type="button"
-              onClick={openCreateForm}
-              className="rounded-lg bg-[#12121a] px-4 py-2 text-sm font-medium text-white transition hover:bg-zinc-800"
-            >
-              Add event type
+      <div className="flex flex-wrap items-center justify-end gap-3">
+        {items.length === 0 ? (
+          <button type="button" onClick={loadDemoData} disabled={isPending} className="btn-gold">
+            {isPending ? "Loading demo..." : "Load demo data"}
+          </button>
+        ) : (
+          <>
+            <button type="button" onClick={clearAll} disabled={isPending} className="btn-danger">
+              Clear all
             </button>
-          </div>
+            <button type="button" onClick={reloadDemoData} disabled={isPending} className="btn-gold">
+              Reload demo data
+            </button>
+          </>
+        )}
+        <button type="button" onClick={openCreateForm} className="btn-primary">
+          Add event type
+        </button>
       </div>
 
       {actionError ? (
-        <p className="rounded-lg bg-rose-50 px-3 py-2 text-sm text-rose-700">
-          {actionError}
-        </p>
+        <p className="rounded-xl bg-rose-50 px-4 py-3 text-sm text-rose-700">{actionError}</p>
       ) : null}
 
       <Modal
@@ -153,24 +124,24 @@ export function EventTypesManager({ items }: EventTypesManagerProps) {
       </Modal>
 
       {items.length === 0 ? (
-        <div className="rounded-2xl border border-dashed border-zinc-200 bg-white p-10 text-center">
-          <p className="text-lg font-medium text-zinc-900">No event types yet</p>
-          <p className="mt-2 text-sm text-zinc-500">
-            Load demo data or add your own types before customers can book.
+        <div className="admin-card border-dashed p-10 text-center">
+          <p className="font-display text-2xl text-midnight">No event types yet</p>
+          <p className="mt-2 text-sm text-muted">
+            These power the booking form on the public website. Load demo data or add your own.
           </p>
           <button
             type="button"
             onClick={loadDemoData}
             disabled={isPending}
-            className="mt-6 rounded-lg bg-[#12121a] px-4 py-2 text-sm font-medium text-white transition hover:bg-zinc-800 disabled:opacity-60"
+            className="btn-primary mt-6"
           >
             {isPending ? "Loading demo..." : "Load demo data"}
           </button>
         </div>
       ) : (
-        <div className="overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm">
-          <table className="min-w-full divide-y divide-zinc-200 text-left text-sm">
-            <thead className="bg-zinc-50 text-xs uppercase tracking-wide text-zinc-500">
+        <div className="admin-card">
+          <table className="min-w-full divide-y divide-border text-left text-sm">
+            <thead className="bg-warm-beige/50 text-xs uppercase tracking-wide text-muted">
               <tr>
                 <th className="px-4 py-3 font-medium">Name</th>
                 <th className="px-4 py-3 font-medium">Icon</th>
@@ -179,20 +150,14 @@ export function EventTypesManager({ items }: EventTypesManagerProps) {
                 <th className="px-4 py-3 font-medium">Action</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-zinc-100">
+            <tbody className="divide-y divide-border/70">
               {items.map((item) => (
-                <tr key={item.id}>
-                  <td className="px-4 py-4 font-medium text-zinc-900">{item.name}</td>
-                  <td className="px-4 py-4 text-zinc-600">{item.icon}</td>
-                  <td className="px-4 py-4 text-zinc-600">{item.sortOrder}</td>
+                <tr key={item.id} className="hover:bg-warm-beige/30">
+                  <td className="px-4 py-4 font-medium text-midnight">{item.name}</td>
+                  <td className="px-4 py-4 text-muted">{item.icon}</td>
+                  <td className="px-4 py-4 text-muted">{item.sortOrder}</td>
                   <td className="px-4 py-4">
-                    <span
-                      className={`rounded-full px-2.5 py-1 text-xs font-medium ${
-                        item.published
-                          ? "bg-emerald-50 text-emerald-700"
-                          : "bg-zinc-100 text-zinc-600"
-                      }`}
-                    >
+                    <span className={item.published ? "published-pill" : "draft-pill"}>
                       {item.published ? "Published" : "Hidden"}
                     </span>
                   </td>
@@ -200,7 +165,7 @@ export function EventTypesManager({ items }: EventTypesManagerProps) {
                     <button
                       type="button"
                       onClick={() => openEditForm(item)}
-                      className="font-medium text-zinc-900 transition hover:text-amber-700"
+                      className="font-semibold text-deep-plum transition hover:text-dusty-rose"
                     >
                       Edit
                     </button>
